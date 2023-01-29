@@ -12,8 +12,8 @@ export default function Navbar() {
                 <ul>
                     <li className="active"><Link to="/">Home</Link></li>
                     <li><Link href="about.html">About Us</Link></li>
-                    <li><Link href="room.html">Rooms</Link></li>
-                    <li><Link href="amenities.html">Amenities</Link></li>
+                    <li><Link to="/hotels">Rooms</Link></li>
+                    <li><Link to="amenities.html">Amenities</Link></li>
                     <li><Link href="booking.html">Booking</Link></li>
                     <li><Link to="/login">Login</Link></li>
                     <li><Link href="contact.html">Contact Us</Link></li>
