@@ -1,18 +1,20 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
+import useFetch from '../../hooks/useFetch.js';
 
 const Roomlist = () => {
-  const [data, setData] = useState([]);
+  const {data, loading ,error} = useFetch("http://127.0.0.1:5000/api/rooms");
+  console.log("sssss"+data);
  
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    fetch('http://127.0.0.1:5000/api/hotels/all')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => {
+  //   fetch('http://127.0.0.1:5000/api/rooms')
+  //     .then(response => response.json())
+  //     .then(data => setData(data))
+  //     .catch(error => {
        
-      });
-  }, []);
+  //     });
+  // }, []);
 
 	return (
 		<div>
@@ -22,7 +24,7 @@ const Roomlist = () => {
                 <div className="section-header">
                     <h2>Our Rooms</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis, enim at venenatis tincidunt.
+                       Book Rooms from Us
                     </p>
                 </div>
                 <div className="row">
@@ -32,7 +34,7 @@ const Roomlist = () => {
                             <div className="col-md-3">
                                 <div className="room-img">
                                     <div className="box12">
-                                        <img src="img/room/room-1.jpg"/>
+                                        <img src={item.photos}/>
                                         <div className="box-content">
                                             <h3 className="title">Standard Single</h3>
                                             <ul className="icon">
@@ -44,11 +46,10 @@ const Roomlist = () => {
                             </div>
                             <div className="col-md-6">
                                 <div className="room-des">
-                                    <h3><a href="#" data-toggle="modal" data-target="#modal-id">Standard Single</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <h3><a href="#" data-toggle="modal" data-target="#modal-id">{item.title}</a></h3>
+                                    <p>{item.desc}</p>
                                     <ul className="room-size">
-                                        <li><i className="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                        <li><i className="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
+                                        <li><i className="fa fa-arrow-right"></i>Max Persons: {item.maxPeople} </li>
                                     </ul>
                                     <ul className="room-icon">
                                         <li className="icon-1"></li>
@@ -66,8 +67,8 @@ const Roomlist = () => {
                             </div>
                             <div className="col-md-3">
                                 <div className="room-rate">
-                                    <h3>From</h3>
-                                    <h1>$150</h1>
+                                    <h3>Price</h3>
+                                    <h1>${item.price}</h1>
                                     <a href="#">Book Now</a>
                                 </div>
                             </div>

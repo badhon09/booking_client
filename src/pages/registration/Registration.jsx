@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import { Navigate  } from "react-router-dom";
 import Swal from 'sweetalert2';
 import axios from 'axios';
+
+// import env from  '../../env'
 import Navbar from '../../components/navbar/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
 
@@ -40,13 +42,15 @@ export default function Registration(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        alert(process.env.REG_URL)
          if (validateForm()) {
             console.log(formData)
             try {
-                axios.post('http://127.0.0.1:5000/api/users/register', formData)
+                axios.post(process.env.REG_URL, formData)
                 .then((response) => {
                   console.log(response);
-                  Swal.fire("Success","Your Account Created Successfully","success")
+                  Swal.fire("Success","Your Account Created Successfully","success");
+                  window.location = "/login" 
                 }, (error) => {
                   console.log(error);
                 });
