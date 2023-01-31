@@ -61,7 +61,7 @@ export default function Login(){
 		 <div id="login">
             <div className="container">
                 <div className="section-header">
-                    <h2>Registration / Login</h2>
+                    <h2> Login</h2>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis, enim at venenatis tincidunt.
                     </p>
