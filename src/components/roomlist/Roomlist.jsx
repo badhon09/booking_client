@@ -19,6 +19,13 @@ const Roomlist = () => {
 	return (
 		<div>
 
+        {loading ? (
+            "Please Wait"
+
+            ) : (
+
+
+        <>
 		 <div id="rooms">
             <div className="container">
                 <div className="section-header">
@@ -80,6 +87,9 @@ const Roomlist = () => {
                 </div>
             </div>
         </div>
+        </>
+
+        )}
 
 		</div>
 	)

@@ -1,10 +1,13 @@
 import React,{useState} from 'react';
 import Swal from 'sweetalert2'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import Navbar from '../../components/navbar/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
 
 export default function Login(){
     const [formData , setFormData] = useState([]);
+     const navigate = useNavigate();
     const handleChange = (e) => {
         setFormData({
              ...formData,
@@ -32,7 +35,21 @@ export default function Login(){
     const handleSubmit = async (e) => {
         e.preventDefault();
          if (validateForm()) {
-              console.log("Form is valid");
+             
+
+            try {
+                  const res = await axios.post('http://127.0.0.1:5000/api/auth/login',formData);
+                  console.log(res.data);
+                  localStorage.setItem('token', res.data.token);
+                  Swal.fire("Login Successfull","success");
+                  navigate("/")
+                  
+                } catch (err) {
+                  console.error(err);
+                  Swal.fire("Login Failed","Check Your Credentials Again","warning");
+                }
+
+
             } else {
               console.log("Form is invalid");
             }
