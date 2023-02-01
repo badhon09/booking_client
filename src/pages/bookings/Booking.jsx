@@ -25,6 +25,7 @@ const Booking = () => {
 				      <th scope="col">Check-In</th>
 				      <th scope="col">Check-Out</th>
 				      <th scope="col">Total</th>
+				      <th scope="col">Payment Status</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -34,7 +35,17 @@ const Booking = () => {
 					      <td>{item.roomNumber}</td>
 					      <td>{item.checkIn}</td>
 					      <td>{item.checkIn}</td>
-					       <td>{item.checkOut}</td>
+					       <td>{item.totalPrice}</td>
+					        <td>
+					        	{item.isPaid==true ? (
+					        				"Paid"
+					        			
+					        		) : (
+					        			<a className="btn btn-warning">Pay</a>
+					        		)
+					        	
+					        	}
+					        </td>
 					    </tr>
 
 					))}

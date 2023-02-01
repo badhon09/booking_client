@@ -1,5 +1,6 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch.js';
+import {Link} from 'react-router-dom';
 
 const Roomlist = () => {
   const {data, loading ,error} = useFetch("http://127.0.0.1:5000/api/rooms");
@@ -76,7 +77,7 @@ const Roomlist = () => {
                                 <div className="room-rate">
                                     <h3>Price</h3>
                                     <h1>${item.price}</h1>
-                                    <a href="#">Book Now</a>
+                                    <Link to={`/room-details/${item._id}`}>Book Now</Link>
                                 </div>
                             </div>
                         </div>
