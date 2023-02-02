@@ -1,13 +1,38 @@
-import React from 'react';
+import React,{useState,useRef} from 'react';
 import Navbar from '../../components/navbar/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
 import useFetch from '../../hooks/useFetch.js';
 import { useParams, useHistory, Link } from "react-router-dom";
 
 const RoomDetails = () => {
+
+    const priceRef = useRef(null)
 	let { id } = useParams();
 	const {data,loading,error} = useFetch("http://127.0.0.1:5000/api/rooms/getroom/"+id)
 	console.log(data)
+
+    const [formData, setFormData] = useState([]);
+
+    const handleChange = (e) => {
+        setFormData({
+             ...formData,
+            [e.target.name]:e.target.value
+        });
+       
+    }
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        const start = new Date(formData.checkIn);
+        const end = new Date(formData.checkOut);
+       
+       const diffTime = end - start;
+       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+       let roomPrice = priceRef.current.value;
+       let totalRoomPrice = roomPrice * diffDays;
+       alert(totalRoomPrice)
+    }
 
 return(
 
@@ -28,6 +53,8 @@ return(
 				<div className="card-header">
 					<h4>{data[0] ? data[0].title : ''}</h4>
 					<img src={data[0] ? data[0].photos : ''}/>
+                    <p>Room Number : {data[0] ? data[0].roomNumber : ''}</p>
+                    <p>Price Per Day : {data[0] ? data[0].price : ''}</p>
 				</div>
 			</div>
 		</div>
@@ -48,8 +75,8 @@ return(
                     <div className="col-12">
                         <div className="booking-form">
                             <div id="success"></div>
-                            <form name="sentMessage" id="bookingForm" novalidate="novalidate">
-                                <div className="form-row">
+                            <form onSubmit={handleSubmit}>
+                                {/*<div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>First Name</label>
                                         <input type="text" className="form-control" id="fname" placeholder="E.g. John" required="required" data-validation-required-message="Please enter first name" />
@@ -72,22 +99,23 @@ return(
                                         <input type="email" className="form-control" id="email" placeholder="E.g. email@example.com" required="required" data-validation-required-message="Please enter your email" />
                                         <p className="help-block text-danger"></p>
                                     </div>
-                                </div>
+                                </div>*/}
+                                <input ref={priceRef} value={data[0] ? data[0].price : ''}/>
                                 <div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>Check-In</label>
-                                        <input type="text" className="form-control datetimepicker-input" id="date-1" data-toggle="datetimepicker" data-target="#date-1" placeholder="E.g. MM/DD/YYYY" required="required" data-validation-required-message="Please enter date"/>
+                                        <input type="date" className="form-control " name="checkIn" value={formData.checkIn} onChange={handleChange}  placeholder="E.g. MM/DD/YYYY" required="required" data-validation-required-message="Please enter date"/>
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <div className="control-group col-md-6">
                                         <label>Check-Out</label>
-                                        <input type="text" className="form-control datetimepicker-input" id="date-2" data-toggle="datetimepicker" data-target="#date-2" placeholder="E.g. MM/DD/YYYY" required="required" data-validation-required-message="Please enter date"/>
+                                        <input type="date" className="form-control " name="checkOut" value={formData.checkOut} onChange={handleChange}  placeholder="E.g. MM/DD/YYYY" required="required" data-validation-required-message="Please enter date"/>
                                         <p className="help-block text-danger"></p>
                                     </div>
                                 </div>
                                 <div className="control-group">
                                     <label>Special Request</label>
-                                    <input type="text" className="form-control" id="request" placeholder="E.g. Special Request" required="required" data-validation-required-message="Please enter your special request" />
+                                    <input type="text" className="form-control" id="request" name="desc" value={formData.desc} onChange={handleChange} placeholder="E.g. Special Request" required="required" data-validation-required-message="Please enter your special request" />
                                     <p className="help-block text-danger"></p>
                                 </div>
                                 <div className="button"><button type="submit" id="bookingButton">Book Now</button></div>
