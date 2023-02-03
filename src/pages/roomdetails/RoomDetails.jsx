@@ -9,20 +9,14 @@ const RoomDetails = () => {
     const priceRef = useRef(null)
 	let { id } = useParams();
 	const {data,loading,error} = useFetch("http://127.0.0.1:5000/api/rooms/getroom/"+id)
-	console.log(data)
+
 
     const [formData, setFormData] = useState([]);
+    const [dataNew,setDataNew] = useState([])
 
     const handleChange = (e) => {
-        setFormData({
-             ...formData,
-            [e.target.name]:e.target.value
-        });
-       
-    }
+        
 
-    const handleSubmit =(e)=>{
-        e.preventDefault();
         const start = new Date(formData.checkIn);
         const end = new Date(formData.checkOut);
        
@@ -31,7 +25,37 @@ const RoomDetails = () => {
 
        let roomPrice = priceRef.current.value;
        let totalRoomPrice = roomPrice * diffDays;
-       alert(totalRoomPrice)
+       const datesArray = getDatesBetween(start, end);
+        console.log(datesArray.length)
+
+       setFormData({
+             ...formData,
+            [e.target.name]:e.target.value,
+            ["total"]:totalRoomPrice,
+            ["dayCount"] : diffDays,
+        });
+    }
+
+    function getDatesBetween(startDate, endDate) {
+      const dates = [];
+      let currentDate = startDate;
+
+      while (currentDate <= endDate) {
+        dates.push(currentDate.toLocaleDateString);
+        currentDate = new Date(currentDate);
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      return dates;
+    }
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+
+       
+      
+       
+       console.log(formData)
     }
 
 return(

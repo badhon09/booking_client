@@ -30,7 +30,7 @@ export default function Searching(){
                     <div className="control-group col-md-3">
                         <div className="form-row">
                             <div className="control-group col-md-6">
-                                <label>Adult</label>
+                                <label>Persons</label>
                                 <select className="custom-select">
                                     <option selected>0</option>
                                     <option value="1">1</option>

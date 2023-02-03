@@ -1,10 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import useFetch from '../../hooks/useFetch.js';
 import {Link} from 'react-router-dom';
 
 const Roomlist = () => {
   const {data, loading ,error} = useFetch("http://127.0.0.1:5000/api/rooms");
-  console.log("sssss"+data);
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+   const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
  
 
   // useEffect(() => {
@@ -36,7 +45,7 @@ const Roomlist = () => {
                     </p>
                 </div>
                 <div className="row">
-                 {data.map(item => (
+                 {currentItems.map(item => (
                     <div className="col-md-12" key={item.id}>
                         <div className="row">
                             <div className="col-md-3">
@@ -86,6 +95,23 @@ const Roomlist = () => {
                      ))}
                     
                 </div>
+                 <ul className="pagination">
+                {[...Array(Math.ceil(data.length / itemsPerPage)).keys()].map(
+                  (pageNumber) => (
+                    <li key={pageNumber}>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          paginate(pageNumber + 1);
+                        }}
+                        className={currentPage === pageNumber + 1 ? "active" : ""}
+                      >
+                        {pageNumber + 1}
+                      </a>
+                    </li>
+                  )
+                )}
+      </ul>
             </div>
         </div>
         </>
