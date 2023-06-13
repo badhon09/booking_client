@@ -3,7 +3,7 @@ import useFetch from '../../hooks/useFetch.js';
 import {Link} from 'react-router-dom';
 
 const Roomlist = () => {
-  const {data, loading ,error} = useFetch("http://127.0.0.1:5000/api/rooms");
+  const {data, loading ,error} = useFetch("http://127.0.0.1:3001/api/rooms");
 
 
   const [currentPage, setCurrentPage] = useState(1);

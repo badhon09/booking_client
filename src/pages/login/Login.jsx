@@ -38,8 +38,9 @@ export default function Login(){
              
 
             try {
-                  const res = await axios.post('http://127.0.0.1:5000/api/auth/login',formData);
+                  const res = await axios.post('http://127.0.0.1:3001/api/auth/login',formData);
                   console.log(res.data);
+                  localStorage.setItem('user', JSON.stringify(res.data));
                   localStorage.setItem('token', res.data.token);
                   Swal.fire("Login Successfull","success");
                   navigate("/")

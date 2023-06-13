@@ -42,11 +42,11 @@ export default function Registration(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(process.env.REG_URL)
+        //alert(process.env.REG_URL)
          if (validateForm()) {
             console.log(formData)
             try {
-                axios.post(process.env.REG_URL, formData)
+                axios.post('http://127.0.0.1:3001/api/users/register', formData)
                 .then((response) => {
                   console.log(response);
                   Swal.fire("Success","Your Account Created Successfully","success");

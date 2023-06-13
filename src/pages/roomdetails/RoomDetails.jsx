@@ -3,17 +3,23 @@ import Navbar from '../../components/navbar/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
 import useFetch from '../../hooks/useFetch.js';
 import { useParams, useHistory, Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const RoomDetails = () => {
 
     const priceRef = useRef(null)
+    
 	let { id } = useParams();
-	const {data,loading,error} = useFetch("http://127.0.0.1:5000/api/rooms/getroom/"+id)
+	const {data,loading,error} = useFetch("http://127.0.0.1:3001/api/rooms/getroom/"+id)
 
 
     const [formData, setFormData] = useState([]);
     const [dataNew,setDataNew] = useState([])
-
+    const storedUser = localStorage.getItem('user');
+    let user = JSON.parse(storedUser);
+    
+console.log(data);
     const handleChange = (e) => {
         
 
@@ -26,13 +32,15 @@ const RoomDetails = () => {
        let roomPrice = priceRef.current.value;
        let totalRoomPrice = roomPrice * diffDays;
        const datesArray = getDatesBetween(start, end);
-        console.log(datesArray.length)
+        console.log(datesArray)
 
        setFormData({
              ...formData,
             [e.target.name]:e.target.value,
-            ["total"]:totalRoomPrice,
-            ["dayCount"] : diffDays,
+            ["roomNumber"]:id,
+            ["totalPrice"]:totalRoomPrice,
+            ["userId"] : user.data._id,
+           
         });
     }
 
@@ -49,13 +57,28 @@ const RoomDetails = () => {
       return dates;
     }
 
-    const handleSubmit =(e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
+
+        console.log(formData)
+
+       // try {
+            await axios.post('http://127.0.0.1:3001/api/bookings/add', formData)
+            .then((response) => {
+              console.log(response);
+              Swal.fire("Success","Your Booking has created","success");
+              //window.location = "/login" 
+            }, (error) => {
+              console.log(error);
+            });
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
        
       
        
-       console.log(formData)
+       //console.log(formData)
     }
 
 return(
@@ -99,7 +122,7 @@ return(
                     <div className="col-12">
                         <div className="booking-form">
                             <div id="success"></div>
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} method='post'>
                                 {/*<div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>First Name</label>
@@ -124,10 +147,11 @@ return(
                                         <p className="help-block text-danger"></p>
                                     </div>
                                 </div>*/}
-                                <input ref={priceRef} value={data[0] ? data[0].price : ''}/>
+                                <input ref={priceRef} name='price' value={data[0] ? data[0].price : ''}/>
                                 <div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>Check-In</label>
+                                        
                                         <input type="date" className="form-control " name="checkIn" value={formData.checkIn} onChange={handleChange}  placeholder="E.g. MM/DD/YYYY" required="required" data-validation-required-message="Please enter date"/>
                                         <p className="help-block text-danger"></p>
                                     </div>

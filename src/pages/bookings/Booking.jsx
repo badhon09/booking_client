@@ -4,8 +4,10 @@ import Footer from '../../components/footer/Footer.jsx';
 import useFetch from '../../hooks/useFetch.js';
 
 const Booking = () => {
-   let userId = "63d5027437e6a5c0c4569a58"
-	  const {data, loading ,error} = useFetch("http://127.0.0.1:5000/api/bookings/all/"+userId);
+	const storedUser = localStorage.getItem('user');
+    let user = JSON.parse(storedUser);
+   let userId = user.data._id
+	  const {data, loading ,error} = useFetch("http://127.0.0.1:3001/api/bookings/all/"+userId);
 	  console.log("aaaaaaaaa"+data);
 
 
