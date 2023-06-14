@@ -9,6 +9,7 @@ import Contact from './pages/contact/Contact';
 import Booking from './pages/bookings/Booking';
 import RoomDetails from './pages/roomdetails/RoomDetails';
 import Registration from './pages/registration/Registration';
+import { Profile } from './pages/profile/Profile';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/hotels" element={<Hotel/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   );

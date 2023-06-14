@@ -17,6 +17,7 @@ const navigate = useNavigate();
     const logout = (e) => {
         //alert("logout")
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         navigate("/login");
     } 
 
@@ -35,6 +36,7 @@ const navigate = useNavigate();
 
                     {isAuthenticated ? (
                         <>
+                         <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/booking">My Booking</Link></li>
                         <li><Link onClick={logout}>Logout</Link></li>
                         </>

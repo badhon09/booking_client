@@ -17,7 +17,10 @@ const Booking = () => {
 			<Navbar/>
 
 			<>
-				<h1 className="">My Booking List</h1>
+			<center>
+			<h1 className="mt-4 justify-item-center">My Booking List</h1>
+			</center>
+				
 				<div className="container table-responsive py-5"> 
 				<table className="table table-bordered table-hover">
 				  <thead className="thead-dark">

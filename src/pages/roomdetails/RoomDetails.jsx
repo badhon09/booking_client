@@ -5,13 +5,14 @@ import useFetch from '../../hooks/useFetch.js';
 import { useParams, useHistory, Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {domain} from '../../utils.js';
 
 const RoomDetails = () => {
 
     const priceRef = useRef(null)
     
 	let { id } = useParams();
-	const {data,loading,error} = useFetch("http://127.0.0.1:3001/api/rooms/getroom/"+id)
+	const {data,loading,error} = useFetch(`${domain}/rooms/getroom/`+id)
 
 
     const [formData, setFormData] = useState([]);
