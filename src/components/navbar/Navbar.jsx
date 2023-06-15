@@ -30,7 +30,7 @@ const navigate = useNavigate();
             <nav className="main-menu top-menu">
                 <ul>
                     <li className="active"><Link to="/">Home</Link></li>
-                    <li><Link to="/hotels">Rooms</Link></li>
+                    <li><Link to="/rooms">Rooms</Link></li>
                     
                     <li><Link to="/contact">Contact Us</Link></li>
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Footer from '../../components/footer/Footer'
 import useFetch from '../../hooks/useFetch';
@@ -13,11 +13,21 @@ export const Profile = () => {
     let user = useContext(appContext);
     let [formData,setFormData] = useState([]);
     const {data,loading,error} = useFetch(`${domain}/users/profile/`+user.data._id);
+    
+    useEffect(()=>{
+        setFormData(data[0]);
+    },[data])
+   
+   
+    const handleChange = async(e) => {
+        setFormData({
+            ...formData,
+           [e.target.name]:e.target.value
+       });
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const formValues = Object.fromEntries(formData.entries());
         try {
 
             await axios.post(`${domain}/users/update-profile/`+user.data._id, formData)
@@ -32,7 +42,7 @@ export const Profile = () => {
         } catch (error) {
             
         }
-        console.log("Form values:", formValues);
+        console.log("Form values:", formData);
     }
   return (
     <div>
@@ -52,18 +62,18 @@ export const Profile = () => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <div className="booking-form">
-                            <div id="success"></div>
+                        <div className="boking-form">
+                           
                             <form onSubmit={handleSubmit} method='post'>
                                 <div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label> Name</label>
-                                        <input type="text" className="form-control" name="name" value={data[0] ? data[0].name : ''} required="required" data-validation-required-message="Please enter first name" />
+                                        <input type="text" className="form-control" name="name" value={formData ? formData.name : ''} onChange={handleChange}  />
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <div className="control-group col-md-6">
                                         <label>Email</label>
-                                        <input type="text" className="form-control" email="email" value={data[0] ? data[0].email : ''} required="required" data-validation-required-message="Please enter last name" />
+                                        <input type="email" className="form-control" name="email" value={formData ? formData.email : ''} onChange={handleChange}/>
                                         <p className="help-block text-danger"></p>
                                     </div>
                                 </div>

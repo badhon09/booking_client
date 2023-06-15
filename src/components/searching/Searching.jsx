@@ -15,7 +15,7 @@ export default function Searching(){
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(formData);
-        navigate(`/hotels?checkIn=${formData.checkIn}&checkOut=${formData.checkOut}&persons=${formData.person}`)
+        navigate(`/rooms?checkIn=${formData.checkIn}&checkOut=${formData.checkOut}&persons=${formData.person}`)
     }
 	return(
         <form onSubmit={handleSubmit}>

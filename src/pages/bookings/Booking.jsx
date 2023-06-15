@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../components/navbar/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
 import useFetch from '../../hooks/useFetch.js';
+import { Grid } from 'react-loader-spinner';
 
 const Booking = () => {
 	const storedUser = localStorage.getItem('user');
@@ -15,6 +16,19 @@ const Booking = () => {
 		
 			<div>
 			<Navbar/>
+			{loading ? (<>
+				<Grid
+				height="80"
+				width="80"
+				color="#4fa94d"
+				ariaLabel="grid-loading"
+				radius="12.5"
+				wrapperStyle={{}}
+				wrapperClass=""
+				visible={true}
+				/>
+			</>) : ( 
+			
 
 			<>
 			<center>
@@ -39,7 +53,7 @@ const Booking = () => {
 					      <th scope="row">1</th>
 					      <td>{item.roomNumber}</td>
 					      <td>{item.checkIn}</td>
-					      <td>{item.checkIn}</td>
+					      <td>{item.checkOut}</td>
 					       <td>{item.totalPrice}</td>
 					        <td>
 					        	{item.isPaid==true ? (
@@ -60,7 +74,8 @@ const Booking = () => {
 				</div>
 
 			</>
-
+	
+			)}
 			<Footer/>
 			</div>
 
