@@ -2,10 +2,13 @@ import React,{useState} from 'react';
 import useFetch from '../../hooks/useFetch.js';
 import {Link} from 'react-router-dom';
 
-const Roomlist = () => {
-  const {data, loading ,error} = useFetch("http://127.0.0.1:3001/api/rooms");
+const Roomlist = (props) => {
+    const data = props.data
 
+    const loading = props.loading
+  //const {data, loading ,error} = useFetch("http://127.0.0.1:3001/api/rooms");
 
+console.log(data)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 
@@ -29,7 +32,7 @@ const Roomlist = () => {
 	return (
 		<div>
 
-        {loading ? (
+        {loading.loading ? (
             "Please Wait"
 
             ) : (
@@ -61,14 +64,14 @@ const Roomlist = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6" key={item.id}>
                                 <div className="room-des">
                                     <h3><a href="#" data-toggle="modal" data-target="#modal-id">{item.title}</a></h3>
                                     <p>{item.desc}</p>
-                                    <ul className="room-size">
+                                    <ul className="room-size" key={item.id}>
                                         <li><i className="fa fa-arrow-right"></i>Max Persons: {item.maxPeople} </li>
                                     </ul>
-                                    <ul className="room-icon">
+                                    <ul className="room-icon" key={item.id}>
                                         <li className="icon-1"></li>
                                         <li className="icon-2"></li>
                                         <li className="icon-3"></li>

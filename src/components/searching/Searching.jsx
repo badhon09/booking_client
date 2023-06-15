@@ -12,6 +12,8 @@ export default function Searching(){
        });
     }
 
+    
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(formData);
@@ -49,7 +51,7 @@ export default function Searching(){
                             <div className="control-group col-md-6">
                                 <label>Persons</label>
                                 <select className="custom-select" name='person' onChange={handleChange}>
-                                    <option selected>0</option>
+                                    <option >0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -65,7 +67,7 @@ export default function Searching(){
                             <div className="control-group col-md-6 kid">
                                 <label>Kid</label>
                                 <select className="custom-select">
-                                    <option selected>0</option>
+                                    <option >0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
