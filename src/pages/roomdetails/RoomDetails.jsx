@@ -94,20 +94,20 @@ return(
 
             ) : (
 
-            <>
+            <center>
 	<div className="row ">
 		<div className="col-md-12">
 			<div className="card">
 				<div className="card-header">
 					<h4>{data[0] ? data[0].title : ''}</h4>
 					<img src={data[0] ? data[0].photos : ''}/>
-                    <p>Room Number : {data[0] ? data[0].roomNumber : ''}</p>
+                    <p>Room Number : {id}</p>
                     <p>Price Per Day : {data[0] ? data[0].price : ''}</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	</>
+	</center>
 
 	)}
 
@@ -124,31 +124,26 @@ return(
                         <div className="booking-form">
                             <div id="success"></div>
                             <form onSubmit={handleSubmit} method='post'>
-                                {/*<div className="form-row">
-                                    <div className="control-group col-md-6">
-                                        <label>First Name</label>
-                                        <input type="text" className="form-control" id="fname" placeholder="E.g. John" required="required" data-validation-required-message="Please enter first name" />
-                                        <p className="help-block text-danger"></p>
-                                    </div>
-                                    <div className="control-group col-md-6">
-                                        <label>Last Name</label>
-                                        <input type="text" className="form-control" id="lname" placeholder="E.g. Sina" required="required" data-validation-required-message="Please enter last name" />
+                                <div className="form-row">
+                                    <div className="control-group col-md-12">
+                                        <label>Full Name</label>
+                                        <input type="text" className="form-control" name='name' value={formData.name} onChange={handleChange} />
                                         <p className="help-block text-danger"></p>
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>Mobile</label>
-                                        <input type="text" className="form-control" id="mobile" placeholder="E.g. +1 234 567 8900" required="required" data-validation-required-message="Please enter your mobile number" />
+                                        <input type="text" className="form-control"  name='phone' value={formData.phone} onChange={handleChange} />
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <div className="control-group col-md-6">
                                         <label>Email</label>
-                                        <input type="email" className="form-control" id="email" placeholder="E.g. email@example.com" required="required" data-validation-required-message="Please enter your email" />
+                                        <input type="email" className="form-control" name='email' value={formData.email} onChange={handleChange}/>
                                         <p className="help-block text-danger"></p>
                                     </div>
-                                </div>*/}
-                                <input ref={priceRef} name='price' value={data[0] ? data[0].price : ''}/>
+                                </div>
+                                <input type='hidden' ref={priceRef} name='price' value={data[0] ? data[0].price : ''}/>
                                 <div className="form-row">
                                     <div className="control-group col-md-6">
                                         <label>Check-In</label>

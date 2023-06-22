@@ -1,5 +1,6 @@
 
 import React from 'react'
+import Searching from '../../components/searching/Searching.jsx';
 
 export default function Footer() {
   return (

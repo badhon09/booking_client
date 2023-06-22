@@ -101,7 +101,7 @@ export default function Registration(){
                                         <input type="password" name="cpassword" value={formData.cpassword} onChange={handleChange} className="form-control" required="required" />
                                     </div>
                                 </div>
-                                <div className="button"><button type="submit">Registration</button></div>
+                                <div className="button"><button className='btn btn-primary' type="submit">Registration</button></div>
                             </form>
                         </div>
                     </div>

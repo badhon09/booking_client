@@ -4,7 +4,8 @@ import {Link,useNavigate} from 'react-router-dom'
 
 export default function Navbar() {
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
       useEffect(() => {
@@ -38,7 +39,7 @@ const navigate = useNavigate();
                         <>
                          <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/booking">My Booking</Link></li>
-                        <li><Link onClick={logout}>Logout</Link></li>
+                        <li><a href='#' onClick={(e)=>logout(e)}>Logout</a></li>
                         </>
                     ) : (
                         <>
